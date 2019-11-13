@@ -14,9 +14,10 @@ class ViewController: UIViewController {
     @IBOutlet var background: UIView!
     @IBOutlet weak var randomWordLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
- 
+    @IBOutlet weak var reset: UIButton!
     
-    let selectedWord = Word.getRandomWord()
+    
+    var selectedWord = Word.getRandomWord()
     
     
     
@@ -24,6 +25,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         randomWordLabel.text = selectedWord.scrambled
         textField.delegate = self
+        reset.isHidden = true
+        reset.isEnabled = false
     }
     
     private func checkAnswer() {
@@ -34,6 +37,8 @@ class ViewController: UIViewController {
         if userInput.isSubset(of: correctAnswer) {
             if guessed.lowercased() == selectedWord.unscrambled {
                 background.backgroundColor = .green
+                reset.isHidden = false
+                reset.isEnabled = true
             }
             } else {
                 background.backgroundColor = .red
@@ -43,6 +48,12 @@ class ViewController: UIViewController {
     
 
     @IBAction func resetButton(_ sender: UIButton) {
+        selectedWord = Word.getRandomWord()
+        randomWordLabel.text = selectedWord.scrambled
+        reset.isHidden = true
+        reset.isEnabled = false
+        background.backgroundColor = .white
+        textField.text = ""
     }
     
     @IBAction func textFieldAction(_ sender: Any) {
@@ -53,16 +64,31 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        for char in Word.randomWordArr(word: selectedWord) {
-//            if textField.text == String(char) {
-//
-//            }
-//        }
-//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+         var label: [Character] = Array(randomWordLabel.text ?? "")
+        for (index, char) in label.enumerated() {
+            if char == Character(string) {
+                label.remove(at: index)
+                randomWordLabel.text = String(label)
+            }
+            
+            
+            
+        }
+        return true
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         checkAnswer()
         textField.resignFirstResponder()
         return true
     }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//
+//    }
+//
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        return true
+//    }
+    
+    
 }

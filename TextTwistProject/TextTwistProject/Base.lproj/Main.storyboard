@@ -37,7 +37,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtV-GJ-l2C">
                                 <rect key="frame" x="184" y="329.5" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Reset"/>
                                 <connections>
                                     <action selector="resetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o0F-VG-gwc"/>
                                 </connections>
@@ -64,6 +64,7 @@
                     <connections>
                         <outlet property="background" destination="8bC-Xf-vdC" id="fH5-vV-CgA"/>
                         <outlet property="randomWordLabel" destination="UFc-l7-Msn" id="HcZ-8K-JCg"/>
+                        <outlet property="reset" destination="TtV-GJ-l2C" id="vHh-5w-vXs"/>
                         <outlet property="textField" destination="yrl-a4-dc3" id="leB-nz-1wV"/>
                     </connections>
                 </viewController>
